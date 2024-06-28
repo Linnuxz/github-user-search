@@ -1,35 +1,58 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from 'react';
+import Header from './components/Header';
+import SearchBar from './components/SearchBar';
+import InfoComponent from './components/InfoComponent';
+import { GithubUserData } from './constants';
+import { fetchApi } from './components/FetchGhApi';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+    const [isLightTheme, setIsLightTheme] = useState<boolean>(false);
+    const [userData, setUserData] = useState<GithubUserData>();
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const data = await fetchApi('linnuxz');
+                setUserData(data);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        fetchData();
+    }, []);
 
-export default App
+    const handleUserDataChange = (data: GithubUserData) => {
+        setUserData(data);
+    };
+
+    return (
+        <div
+            className={`min-h-screen px-[24px] py-[31px] ${
+                isLightTheme
+                    ? 'bg-[#F6F8FF] duration-500'
+                    : 'bg-[#141D2F] duration-500'
+            }`}
+        >
+            <div className='md:max-w-[573px] mx-auto'>
+                <Header
+                    isLightTheme={isLightTheme}
+                    setIsLightTheme={setIsLightTheme}
+                />
+                <div className="flex flex-col gap-4 mt-9">
+                    <SearchBar
+                        isLightTheme={isLightTheme}
+                        onUserDataChange={handleUserDataChange}
+                    />
+                    {userData && (
+                        <InfoComponent
+                            isLightTheme={isLightTheme}
+                            data={userData}
+                        />
+                    )}
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default App;
