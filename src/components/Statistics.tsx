@@ -13,9 +13,9 @@ const Statistics = ({ data, isLightTheme }: TComponent) => {
                     : 'bg-[#141D2F] duration-500'
             }  h-[85px] w-full items-center justify-center rounded-[10px] md:justify-around`}
         >
-            <div className="w-[79px] text-center md:text-left flex flex-col gap-2">
+            <div className="w-[79px] text-center md:text-left flex flex-col gap-2 md:gap-1">
                 <p
-                    className={`text-[11px] ${
+                    className={`text-[11px] md:text-[13px] ${
                         isLightTheme
                             ? 'text-[#4B6A9B] duration-500'
                             : 'text-white duration-500'
@@ -24,7 +24,7 @@ const Statistics = ({ data, isLightTheme }: TComponent) => {
                     Repos
                 </p>
                 <p
-                    className={`font-bold text-[16px] ${
+                    className={`font-bold text-[16px] md:text-[22px] ${
                         isLightTheme
                             ? 'text-[#2B3442] duration-500'
                             : 'text-white duration-500'
@@ -33,9 +33,9 @@ const Statistics = ({ data, isLightTheme }: TComponent) => {
                     {data.public_repos}
                 </p>
             </div>
-            <div className="w-[79px] text-center md:text-left flex flex-col gap-2">
+            <div className="w-[79px] text-center md:text-left flex flex-col gap-2 md:gap-1">
                 <p
-                    className={`text-[11px] ${
+                    className={`text-[11px] md:text-[13px] ${
                         isLightTheme
                             ? 'text-[#4B6A9B] duration-500'
                             : 'text-white duration-500'
@@ -44,7 +44,7 @@ const Statistics = ({ data, isLightTheme }: TComponent) => {
                     Followers
                 </p>
                 <p
-                    className={`font-bold text-[16px] ${
+                    className={`font-bold text-[16px] md:text-[22px] ${
                         isLightTheme
                             ? 'text-[#2B3442] duration-500'
                             : 'text-white duration-500'
@@ -53,9 +53,9 @@ const Statistics = ({ data, isLightTheme }: TComponent) => {
                     {data.followers}
                 </p>
             </div>
-            <div className="w-[79px] text-center md:text-left flex flex-col gap-2">
+            <div className="w-[79px] text-center md:text-left flex flex-col gap-2 md:gap-1">
                 <p
-                    className={`text-[11px] ${
+                    className={`text-[11px] md:text-[13px] ${
                         isLightTheme
                             ? 'text-[#4B6A9B] duration-500'
                             : 'text-white duration-500'
@@ -64,7 +64,7 @@ const Statistics = ({ data, isLightTheme }: TComponent) => {
                     Following
                 </p>
                 <p
-                    className={`font-bold text-[16px] ${
+                    className={`font-bold text-[16px] md:text-[22px] ${
                         isLightTheme
                             ? 'text-[#2B3442] duration-500'
                             : 'text-white duration-500'

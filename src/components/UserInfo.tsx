@@ -44,7 +44,7 @@ const UserInfo = ({ data, isLightTheme }: TComponent) => {
                             isLightTheme
                                 ? 'text-[#697C9A] duration-500'
                                 : 'text-white duration-500'
-                        } text-[13px]`}
+                        } text-[13px] md:text-[15px]`}
                     >
                         {joinedDate}
                     </p>
@@ -55,7 +55,7 @@ const UserInfo = ({ data, isLightTheme }: TComponent) => {
                     isLightTheme
                         ? 'text-[#4B6A9B] duration-500'
                         : 'text-white duration-500'
-                } text-[13px] leading-[25px]`}
+                } text-[13px] md:text-[15px] leading-[25px]`}
             >
                 {data.bio ||
                     'Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donecodio. Quisque volutpat mattis eros.'}
