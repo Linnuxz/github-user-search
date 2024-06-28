@@ -33,7 +33,7 @@ const App = () => {
                     : 'bg-[#141D2F] duration-500'
             }`}
         >
-            <div className='md:max-w-[573px] mx-auto'>
+            <div className='md:max-w-[573px] lg:max-w-[730px] mx-auto'>
                 <Header
                     isLightTheme={isLightTheme}
                     setIsLightTheme={setIsLightTheme}
