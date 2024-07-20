@@ -26,9 +26,6 @@ const App = () => {
         fetchData();
     }, []);
 
-    useEffect(() => {
-        console.log(isNotFound);
-    }, [isNotFound]);
 
     const handleUserDataChange = (data: GithubUserData) => {
         if (data) {
