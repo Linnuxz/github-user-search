@@ -8,32 +8,49 @@ import { fetchApi } from './components/FetchGhApi';
 const App = () => {
     const [isLightTheme, setIsLightTheme] = useState<boolean>(false);
     const [userData, setUserData] = useState<GithubUserData>();
+    const [isNotFound, setIsNotFound] = useState<boolean>(false);
 
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const data = await fetchApi('linnuxz');
+                const data = await fetchApi('Linnuxz');
                 setUserData(data);
+                setIsNotFound(false);
             } catch (error) {
-                console.log(error);
+                setIsNotFound(true);
+                setTimeout(() => {
+                    setIsNotFound(false);
+                }, 3000);
             }
         };
         fetchData();
     }, []);
 
+    useEffect(() => {
+        console.log(isNotFound);
+    }, [isNotFound]);
+
     const handleUserDataChange = (data: GithubUserData) => {
-        setUserData(data);
+        if (data) {
+            setUserData(data);
+            setIsNotFound(false);
+        } else {
+            setIsNotFound(true);
+            setTimeout(() => {
+                setIsNotFound(false);
+            }, 3000);
+        }
     };
 
     return (
         <div
-            className={`min-h-screen px-[24px] py-[31px] ${
+            className={`min-h-screen px-[24px] py-[31px]  ${
                 isLightTheme
                     ? 'bg-[#F6F8FF] duration-500'
                     : 'bg-[#141D2F] duration-500'
             }`}
         >
-            <div className='md:max-w-[573px] xl:max-w-[730px] mx-auto'>
+            <div className="md:max-w-[573px] xl:max-w-[730px] mx-auto">
                 <Header
                     isLightTheme={isLightTheme}
                     setIsLightTheme={setIsLightTheme}
@@ -42,11 +59,14 @@ const App = () => {
                     <SearchBar
                         isLightTheme={isLightTheme}
                         onUserDataChange={handleUserDataChange}
+                        isNotFound={isNotFound}
+                        setIsNotFound={setIsNotFound}
                     />
                     {userData && (
                         <InfoComponent
                             isLightTheme={isLightTheme}
                             data={userData}
+                            isNotFound={isNotFound}
                         />
                     )}
                 </div>

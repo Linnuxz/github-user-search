@@ -5,10 +5,17 @@ import { fetchApi } from './FetchGhApi';
 
 type TComponent = TTheme & {
     onUserDataChange: (data: GithubUserData) => void;
+    setIsNotFound: (value: boolean) => void;
+    isNotFound: boolean;
 };
 
-const SearchBar = ({ isLightTheme, onUserDataChange }: TComponent) => {
-    const [username, setUsername] = useState<string>('octocat');
+const SearchBar = ({
+    isLightTheme,
+    onUserDataChange,
+    isNotFound,
+    setIsNotFound,
+}: TComponent) => {
+    const [username, setUsername] = useState<string>('Linnuxz');
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setUsername(e.target.value);
@@ -20,9 +27,20 @@ const SearchBar = ({ isLightTheme, onUserDataChange }: TComponent) => {
         }
     };
 
+    const onDataNotFound = () => {
+        setIsNotFound(true);
+        setTimeout(() => {
+            setIsNotFound(false);
+        }, 2000);
+    };
+
     const handleSearch = async () => {
         try {
             const data = await fetchApi(username);
+            if (data.message === 'Not Found') {
+                onDataNotFound();
+                return;
+            }
             onUserDataChange(data);
         } catch (error) {
             console.log(error);
@@ -46,6 +64,13 @@ const SearchBar = ({ isLightTheme, onUserDataChange }: TComponent) => {
                 alt="searchIcon"
                 className="w-[20px] h-[20px] absolute top-5 left-4"
             />
+            <p
+                className={`absolute top-[19px] right-[140px] z-10 text-[#F74646] hidden ${
+                    isNotFound ? 'md:block' : ''
+                }`}
+            >
+                No results
+            </p>
             <button
                 className="absolute right-2 top-[6px] bg-[#0079FF] text-white w-[84px] md:w-[106px] h-[46px] rounded-[10px]"
                 onClick={handleSearch}
